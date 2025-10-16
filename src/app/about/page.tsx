@@ -34,7 +34,7 @@ import React from 'react'
               </p>
             </div>
             <div className="  pt-10 md:pl-10">
-              <p className=" h-[72] font-normal text-[14px] leading-[24px] tracking-[0%] align-middle text-[#202435]">
+              <p className="font-normal text-[14px] leading-[24px] tracking-[0%] align-middle text-[#202435]">
                 In nec purus eget neque accumsan finibus. Duis condimentum elit
                 ut libero commodo iaculis. Donec augue diam, tristique et
                 ultricies nec, consectetur quis enim. Nullam id rutrum ex.
