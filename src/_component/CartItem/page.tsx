@@ -41,7 +41,7 @@ export default function page({ data }: { data: any }) {
       </div>
 
       <div className="text-gray-800 font-semibold w-full sm:w-1/4 text-center sm:text-left">
-        ${data.totalPrice.toFixed(2)}
+        EGP {data.totalPrice.toFixed(2)}
       </div>
 
       <div className="w-full sm:w-1/4 text-center sm:text-right">
