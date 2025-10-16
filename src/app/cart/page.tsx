@@ -18,11 +18,11 @@ const Page = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4">
       {items.length < 1 ? (
-        <div className="flex justify-center items-center py-40 text-mainColor text-center h-[75vh]">
+        <div className="flex justify-center items-center py-40 text-mainColor text-center h-[85vh]">
           <h1 className="text-2xl sm:text-3xl text-black">Cart Is Empty</h1>
         </div>
       ) : (
-        <div className="max-w-5xl mx-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 space-y-4 mt-28 mb-10 min-h-[50vh]">
+        <div className="max-w-5xl mx-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 space-y-4 mt-28 mb-10 min-h-[70vh]">
           {items?.map((item : any) => (
             <CartItem key={item.product.id} data={item} />
           ))}
