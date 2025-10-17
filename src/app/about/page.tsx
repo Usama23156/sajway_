@@ -46,15 +46,15 @@ import React from 'react'
               </p>
             </div>
           </div>
-          <div className=" pt-[40px] h-lvh max-w-full">
+          <div className=" pt-[40px]">
             <img
               loading="lazy"
               style={{ backgroundImage: `url(/about2.jpg)` }}
               alt=""
-              className="w-screen h-full object-cover min-h-full min-w-full bg-center bg-fixed"
+              className="w-full h-96 bg-center bg-cover bg-fixed"
             />
           </div>
-          <div className="body md:pr-[145px] md:pl-[145px] pl-8 pr-8 flex flex-col relative pt-10 ">
+          <div className="body md:pr-[145px] md:pl-[145px] pl-8 pr-8 flex flex-col relative ">
             <div className=" max-w-full  pt-[60px] pr-[15px] pb-10  pl-[15px] lg:pl-10">
               <div className=" pl-[40px]">
                 <p className="font-normal text-[16px] leading-[24px] tracking-[-0.1px] align-middle text-[#202435]">
