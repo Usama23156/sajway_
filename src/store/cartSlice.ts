@@ -5,79 +5,70 @@ interface Product {
   id: number;
   img: string;
   name: string;
-  price: number; // Use number for calculations
+  price: number;
   descrption: string;
-  size?: string; // Optional size property
+  size?: string;
 }
 
-// Define the cart item type
 interface CartItem {
   product: Product;
   count: number;
   totalPrice: number;
 }
 
-// Define the initial state type
 interface CartState {
   products: CartItem[];
 }
 
-// Initial state
 const initialState: CartState = {
   products: [],
 };
 
-// Create the slice
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addCart(state, action: PayloadAction<Product & { quantity?: number }>) {
-      const product = action.payload;
-      const quantity = typeof product.quantity === 'number' ? product.quantity : 1;
-      const price = Number(product.price);
+    // ✅ Fix: Expect payload shape to be { product, quantity }
+    addCart: (state, action: PayloadAction<{ product: Product; quantity?: number }>) => {
+      const { product, quantity = 1 } = action.payload;
 
-      const exItem = state.products.find(
-        (item) =>
-          item.product.id === product.id && item.product.size === product.size
+      const existingItem = state.products.find(
+        (item) => item.product.id === product.id
       );
 
-      if (exItem) {
-        exItem.count += quantity;
-        exItem.totalPrice += price * quantity; // Ensure price is a number
+      if (existingItem) {
+        existingItem.count += quantity;
+        existingItem.totalPrice += product.price * quantity;
       } else {
         state.products.push({
           product,
           count: quantity,
-          totalPrice: price * quantity,
+          totalPrice: product.price * quantity,
         });
       }
     },
+
     increase(state, action: PayloadAction<Product>) {
-      const exItem = state.products.find(
+      const item = state.products.find(
         (item) => item.product.id === action.payload.id
       );
 
-      if (exItem) {
-        exItem.count += 1;
-        exItem.totalPrice += action.payload.price; // Ensure price is a number
-      } else {
-        console.warn("Item not found in cart for increase operation.");
+      if (item) {
+        item.count += 1;
+        item.totalPrice += action.payload.price;
       }
     },
 
     decrease(state, action: PayloadAction<Product>) {
-      const exItem = state.products.find(
+      const item = state.products.find(
         (item) => item.product.id === action.payload.id
       );
 
-      if (exItem && exItem.count > 1) {
-        exItem.count -= 1;
-        exItem.totalPrice -= action.payload.price; // Ensure price is a number
-      } else if (exItem) {
+      if (item && item.count > 1) {
+        item.count -= 1;
+        item.totalPrice -= action.payload.price;
+      } else if (item) {
         console.warn("Cannot decrease count below 1.");
-      } else {
-        console.warn("Item not found in cart for decrease operation.");
       }
     },
 
@@ -86,14 +77,12 @@ const cartSlice = createSlice({
         (item) => item.product.id !== action.payload.id
       );
     },
+
     cleanUpCart(state) {
       state.products = [];
     },
   },
 });
 
-// Export actions and reducer
-export const { addCart, removeItem, increase, decrease, cleanUpCart } =
-  cartSlice.actions;
+export const { addCart, removeItem, increase, decrease, cleanUpCart } = cartSlice.actions;
 export default cartSlice.reducer;
-
